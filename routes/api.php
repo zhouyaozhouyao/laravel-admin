@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+$api = app('Dingo\Api\Routing\Router');
+foreach (glob(app()->basePath('routes/api/*.php')) as $filename) {
+    include $filename;
+}
