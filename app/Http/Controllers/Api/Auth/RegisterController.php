@@ -27,6 +27,7 @@ class RegisterController extends Controller
         $this->validateRequest($request);
 
         $user->fill($request->all());
+        $user->password = bcrypt($request->get('password'));
         $user->save();
 
         return $this->response->item($user, DefaultTransformer::class);
