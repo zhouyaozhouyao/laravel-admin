@@ -19,12 +19,24 @@ class LoginController extends Controller
      * @param Request $request
      * @return mixed
      * @throws \ErrorException
-     * @throws \HttpException
      */
     public function login(Request $request)
     {
         $this->validateRequest($request);
         $token = app(TokenProxy::class)->issueToken($request->all(), 'password');
+        return $this->response->array($token, DefaultTransformer::class);
+    }
+
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws \ErrorException
+     */
+    public function refresh(Request $request)
+    {
+        $this->validateRequest($request);
+        $token = app(TokenProxy::class)->issueToken($request->all(), 'refresh_token');
         return $this->response->array($token, DefaultTransformer::class);
     }
 }

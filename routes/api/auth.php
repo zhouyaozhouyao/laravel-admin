@@ -16,6 +16,11 @@ $api->version('v1', [
     $api->post('register', 'RegisterController@register')
         ->name('register');
 
+    //登录获取 access_token
     $api->post('login','LoginController@login')
         ->name('login');
+
+    // 根据refresh_token 换取access_token
+    $api->post('token/refresh','LoginController@refresh')
+        ->name('refresh');
 });

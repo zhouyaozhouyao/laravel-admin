@@ -6,15 +6,14 @@
  * Time: 23:07
  */
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\Controller;
 
 class UsersController extends Controller
 {
-    public function register(Request $request)
+    public function me(Request $request)
     {
-
+        dd($this->user());
     }
 }

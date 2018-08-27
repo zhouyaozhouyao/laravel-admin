@@ -31,6 +31,7 @@ class Controller extends BaseController{
         list($controller, $method) = explode('@', $request->route()->action['uses']);
         $method = $name ?: $method;
         $class = str_replace('Controller', 'Validation', $controller);
+
         if(!class_exists($class) || !method_exists($class, $method)) {
             return false;
         }

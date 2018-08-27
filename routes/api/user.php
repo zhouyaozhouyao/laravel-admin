@@ -8,7 +8,9 @@
 
 $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => []], function ($api) {
 
-
+    //注册用户
+    $api->get('user', 'UsersController@me')
+        ->name('user');
 
 
 });
