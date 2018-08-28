@@ -23,4 +23,8 @@ $api->version('v1', [
     // 根据refresh_token 换取access_token
     $api->post('token/refresh','LoginController@refresh')
         ->name('refresh');
+
+    //删除 token.
+    $api->delete('token/revoke','LoginController@revoke')
+        ->name('revoke');
 });
