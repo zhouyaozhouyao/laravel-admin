@@ -10,7 +10,7 @@ class User extends Authenticatable
     use HasApiTokens;
 
     protected $fillable = [
-        'name', 'email','gender', 'real_name', 'password', 'github_id', 'github_name', 'github_url', 'city', 'company', 'website', 'introduction', 'avatar', 'register_source',
+        'name', 'email','gender', 'real_name', 'password', 'github_name', 'github_url', 'city', 'company', 'website', 'introduction', 'avatar', 'register_source',
     ];
 
     /**

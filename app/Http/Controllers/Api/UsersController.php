@@ -8,12 +8,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function me(Request $request)
+    //获取个人信息.
+    public function me()
     {
-        dd($this->user());
+        return $this->response->item($this->user(), new UserTransformer());
     }
 }
