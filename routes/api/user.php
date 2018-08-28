@@ -6,7 +6,7 @@
  * Time: 22:35
  */
 
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['api.auth']], function ($api) {
+$api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['api.auth','serializer:array']], function ($api) {
 
     //获取用户的个人信息
     $api->get('user', 'UsersController@me')

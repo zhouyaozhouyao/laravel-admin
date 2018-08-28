@@ -39,8 +39,8 @@ class UserTransformer extends TransformerAbstract
             'is_banned'            => $user->is_banned,
             'email_notify_enabled' => $user->email_notify_enabled,
             'last_actived_at'      => $user->last_actived_at,
-            'created_at'           => $user->created_at,
-            'updated_at'           => $user->updated_at,
+            'created_at'           => $user->created_at->toDateTimeString(),
+            'updated_at'           => $user->updated_at->toDateTimeString(),
         ];
     }
 }

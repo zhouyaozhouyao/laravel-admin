@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Transformers\DefaultTransformer;
+use App\Transformers\UserTransformer;
 use App\Http\Controllers\Api\Controller;
 
 class RegisterController extends Controller
@@ -30,6 +30,6 @@ class RegisterController extends Controller
         $user->password = bcrypt($request->get('password'));
         $user->save();
 
-        return $this->response->item($user, DefaultTransformer::class);
+        return $this->response->item($user, UserTransformer::class)->setStatusCode(201);
     }
 }
