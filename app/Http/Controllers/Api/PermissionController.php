@@ -17,7 +17,11 @@ class PermissionController extends Controller
     public function index(Permission $permission)
     {
         $permissions = $permission->paginate();
+        $collection = collect([1, 2, 3, 4, 5]);
 
+        $groups = $collection->split(3);
+
+        $groups->toArray();
         return $this->response->paginator($permissions, PermissionTransformer::class);
     }
 
