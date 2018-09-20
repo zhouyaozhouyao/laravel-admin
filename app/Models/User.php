@@ -78,4 +78,12 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * 用户关联角色反向一对一关系.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

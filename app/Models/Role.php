@@ -26,4 +26,25 @@ class Role extends Model
     protected $fillable = [
         'name','remark'
     ];
+
+
+    /**
+     * 定义角色和用户一对多关系.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+
+    /**
+     * 定义角色和权限多对多关系.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class,"role_has_permissions","role_id","permission_id");
+    }
+
 }

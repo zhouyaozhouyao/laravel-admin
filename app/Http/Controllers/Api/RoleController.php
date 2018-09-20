@@ -46,6 +46,7 @@ class RoleController extends Controller
         $this->validateRequest($request);
         $role->fill($request->all());
         $role->save();
+        $role->permissions()->attach($request->get("permission_id"));
 
         return $this->response->item($role,RoleTransformer::class)->setStatusCode(201);
     }

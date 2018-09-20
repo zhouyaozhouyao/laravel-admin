@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Permission;
-use App\Transformers\PermissionTransformer;
 use Illuminate\Http\Request;
+use App\Transformers\PermissionTransformer;
 
 class PermissionController extends Controller
 {
@@ -17,11 +17,7 @@ class PermissionController extends Controller
     public function index(Permission $permission)
     {
         $permissions = $permission->paginate();
-        $collection = collect([1, 2, 3, 4, 5]);
 
-        $groups = $collection->split(3);
-
-        $groups->toArray();
         return $this->response->paginator($permissions, PermissionTransformer::class);
     }
 
