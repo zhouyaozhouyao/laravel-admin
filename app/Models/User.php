@@ -86,4 +86,18 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * 获取用户的权限列表.
+     * @return null
+     */
+    public function getAllPermissions()
+    {
+        $role = $this->role;
+        if( is_null($role) ){
+            return null;
+        }
+
+        return optional($role)->permissions()->get();
+    }
 }

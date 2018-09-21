@@ -8,8 +8,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Transformers\UserTransformer;
+use App\Transformers\PermissionTransformer;
 
 class UsersController extends Controller
 {
@@ -19,8 +21,20 @@ class UsersController extends Controller
         return $this->response->item($this->user(), new UserTransformer());
     }
 
+
+    /**
+     * 获取某个用户的所有权限列表.
+     * @return \Dingo\Api\Http\Response
+     */
+    public function permissions()
+    {
+        $permissions = Auth::user()->getAllPermissions();
+
+        return $this->response->collection($permissions, PermissionTransformer::class);
+    }
+
     public function update(Request $request)
     {
-
+        
     }
 }
