@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Role;
-use App\Transformers\RoleTransformer;
+use App\Models\Permission;
 use Illuminate\Http\Request;
+use App\Transformers\RoleTransformer;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RoleController extends Controller
 {
@@ -41,14 +43,18 @@ class RoleController extends Controller
      * @param Role    $role
      * @return \Dingo\Api\Http\Response
      */
-    public function store(Request $request,Role $role)
+    public function store(Request $request, Role $role)
     {
         $this->validateRequest($request);
+        $permission_ids = $request->get("permission_ids");
+        $this->permissionExist($permission_ids);
+
         $role->fill($request->all());
         $role->save();
-        $role->permissions()->attach($request->get("permission_id"));
 
-        return $this->response->item($role,RoleTransformer::class)->setStatusCode(201);
+        $role->permissions()->attach($request->get("permission_ids"));
+
+        return $this->response->item($role, RoleTransformer::class)->setStatusCode(201);
     }
 
 
@@ -58,12 +64,29 @@ class RoleController extends Controller
      * @param Role    $role
      * @return \Dingo\Api\Http\Response
      */
-    public function update(Request $request,Role $role)
+    public function update(Request $request, Role $role)
     {
         $this->validateRequest($request);
+        $permission_ids = $request->get("permission_ids");
+        $this->permissionExist($permission_ids);
+
         $role->fill($request->all());
         $role->save();
+        $role->permissions()->sync($permission_ids);
 
         return $this->response->noContent();
+    }
+
+    /**
+     * @param array $permission_ids
+     */
+    protected function permissionExist(array $permission_ids): void
+    {
+        collect($permission_ids)->map(function($item, $key) {
+
+            if(!app(Permission::class)->find($item)) {
+                throw new HttpException(422, "权限id不存在");
+            }
+        });
     }
 }
