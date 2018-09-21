@@ -13,6 +13,9 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
 {
+
+    protected $availableIncludes = ['role'];
+
     /**
      * @param User $user
      * @return array
@@ -42,5 +45,10 @@ class UserTransformer extends TransformerAbstract
             'created_at'           => $user->created_at->toDateTimeString(),
             'updated_at'           => $user->updated_at->toDateTimeString(),
         ];
+    }
+
+    public function includeRole(User $user)
+    {
+        return $this->item($user->role, new RoleTransformer());
     }
 }
