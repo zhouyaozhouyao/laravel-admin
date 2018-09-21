@@ -18,4 +18,9 @@ class UsersController extends Controller
     {
         return $this->response->item($this->user(), new UserTransformer());
     }
+
+    public function update(Request $request)
+    {
+
+    }
 }
