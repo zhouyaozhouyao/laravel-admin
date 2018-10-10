@@ -7,7 +7,7 @@
  */
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api\Auth', 'middleware' => ['api.throttle'],
+    'namespace' => 'App\Http\Controllers\Api\Auth', 'middleware' => ['cors','api.throttle'],
     'limit' => config('api.rate_limits.sign.limit'),
     'expires' => config('api.rate_limits.sign.expires'),
 ], function ($api) {
