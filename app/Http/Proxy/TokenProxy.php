@@ -20,7 +20,7 @@ class TokenProxy
      * @param string $grant_type
      * @return mixed
      */
-    public function issueToken(array $params,string $grant_type)
+    public function issueToken(array $params, string $grant_type)
     {
         //oauth/token
         $data = [
@@ -29,16 +29,14 @@ class TokenProxy
             'grant_type'    => $grant_type,
         ];
 
-        $data = array_merge($data,$params);
+        $data = array_merge($data, $params);
         $response = app(Client::class)->post(url('oauth/token'), [
             'form_params' => $data,
-            'http_errors'=> false,
+            'http_errors' => false,
         ]);
-
         $resp = json_decode((string)$response->getBody(), true);
-
-        if($response->getStatusCode() != 200){
-            throw new HttpException($response->getStatusCode(),$resp['error']);
+        if($response->getStatusCode() != 200) {
+            throw new HttpException(422, "账号或密码错误");
         }
 
         return $resp;
