@@ -44,14 +44,20 @@ class LoginController extends Controller
     }
 
 
-    //rm access_token.
-    public function revoke()
+    //logout.
+    public function logout()
     {
         if(!\Auth::check()){
             throw new UnauthorizedHttpException(get_class($this), 'Unable to authenticate with invalid API key and token.');
         }
 
-        $this->user()->token()->revoke();
+        $accessToken = $this->user()->token();
+
+        app('db')->table('oauth_refresh_tokens')
+            ->where('access_token_id', $accessToken->id)
+            ->update(['revoked' => true]);
+
+        $accessToken->revoke();
 
         return $this->response->noContent();
     }

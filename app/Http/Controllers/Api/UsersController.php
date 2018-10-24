@@ -29,7 +29,6 @@ class UsersController extends Controller
     public function permissions()
     {
         $permissions = Auth::user()->getAllPermissions();
-
         return $this->response->collection($permissions, PermissionTransformer::class);
     }
 

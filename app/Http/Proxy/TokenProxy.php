@@ -34,6 +34,7 @@ class TokenProxy
             'form_params' => $data,
             'http_errors' => false,
         ]);
+
         $resp = json_decode((string)$response->getBody(), true);
         if($response->getStatusCode() != 200) {
             throw new HttpException(422, "账号或密码错误");

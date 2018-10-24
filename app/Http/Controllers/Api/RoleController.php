@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Role;
 use App\Models\Permission;
+use App\Services\PermissionService;
 use Illuminate\Http\Request;
 use App\Transformers\RoleTransformer;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -55,6 +56,18 @@ class RoleController extends Controller
         $role->permissions()->attach($request->get("permission_ids"));
 
         return $this->response->item($role, RoleTransformer::class)->setStatusCode(201);
+    }
+
+
+    /**
+     * 获取某个角色信息.
+     * @param Request $request
+     * @param Role    $role
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show(Request $request,Role $role)
+    {
+        return $this->response->item($role,RoleTransformer::class)->setStatusCode(200);
     }
 
 

@@ -7,24 +7,25 @@
  */
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api\Auth', 'middleware' => ['cors','api.throttle'],
-    'limit' => config('api.rate_limits.sign.limit'),
-    'expires' => config('api.rate_limits.sign.expires'),
-], function ($api) {
+    'namespace'  => 'App\Http\Controllers\Api\Auth',
+    'middleware' => ['cors', 'api.throttle'],
+    'limit'      => config('api.rate_limits.sign.limit'),
+    'expires'    => config('api.rate_limits.sign.expires'),
+], function($api) {
 
     //注册用户
     $api->post('register', 'RegisterController@register')
         ->name('register');
 
     //登录获取 access_token
-    $api->post('login','LoginController@login')
+    $api->post('login', 'LoginController@login')
         ->name('login');
 
     // 根据refresh_token 换取access_token
-    $api->post('token/refresh','LoginController@refresh')
+    $api->post('token/refresh', 'LoginController@refresh')
         ->name('refresh');
 
     //删除 token.
-    $api->delete('token/revoke','LoginController@revoke')
-        ->name('revoke');
+    $api->delete('logout', 'LoginController@logout')
+        ->name('logout');
 });

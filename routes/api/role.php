@@ -22,6 +22,10 @@ $api->version('v1', [
     $api->post('roles','RoleController@store')
         ->name('roles.store');
 
+    //获取某个角色信息
+    $api->get('roles/{role}','RoleController@show')
+        ->name('roles.show');
+
     //更新角色
     $api->put('roles/{role}','RoleController@update')
         ->name('roles.update');

@@ -13,6 +13,7 @@ use League\Fractal\TransformerAbstract;
 
 class RoleTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = ['permissions'];
 
     public function transform(Role $role)
     {
@@ -24,5 +25,12 @@ class RoleTransformer extends TransformerAbstract
             'created_at' => $role->created_at->toDateTimeString(),
             'updated_at' => $role->updated_at->toDateTimeString(),
         ];
+    }
+
+    public function includePermissions(Role $role)
+    {
+        if ($role->permissions){
+            return $this->collection($role->permissions, new PermissionTransformer());
+        }
     }
 }

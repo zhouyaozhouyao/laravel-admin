@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\Models\User
- *
  * @property int $id
  * @property string $name 昵称
  * @property string $email 邮箱
@@ -33,7 +33,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens*@property mixed role
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereCompany($value)
@@ -95,7 +95,7 @@ class User extends Authenticatable
     {
         $role = $this->role;
         if( is_null($role) ){
-            return null;
+            return new Collection();
         }
 
         return optional($role)->permissions()->get();
