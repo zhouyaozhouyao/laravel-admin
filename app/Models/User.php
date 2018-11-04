@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\Models\User
+ *
  * @property int $id
  * @property string $name 昵称
  * @property string $email 邮箱
@@ -59,6 +59,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereWebsite($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  */
 class User extends Authenticatable
 {
@@ -76,28 +77,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password'
     ];
-
-
-    /**
-     * 用户关联角色反向一对一关系.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    /**
-     * 获取用户的权限列表.
-     * @return null
-     */
-    public function getAllPermissions()
-    {
-        $role = $this->role;
-        if( is_null($role) ){
-            return new Collection();
-        }
-
-        return optional($role)->permissions()->get();
-    }
 }

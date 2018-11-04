@@ -17,10 +17,10 @@ class CreatePermissionsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique()->comment('权限名称');
             $table->string('route')->nullable()->comment('权限路由');
+            $table->string('icon')->nullable()->comment('icon图标');
             $table->integer('parent_id')->default(0)->unsigned()->comment('上级权限');
             $table->tinyInteger('is_hidden')->default(0)->unsigned()->comment('是否隐藏');
             $table->integer('sort')->default(255)->unsigned()->comment('排序');
-            $table->tinyInteger('status')->index()->default(1)->comment('状态: 1 正常, 2=>禁止');
             $table->timestamps();
         });
     }

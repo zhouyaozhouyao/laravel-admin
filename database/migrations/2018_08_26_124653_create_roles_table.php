@@ -17,7 +17,6 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->string('name')->comment('角色名称');
             $table->text('remark')->nullable()->comment('角色描述');
-            $table->tinyInteger('status')->index()->default(1)->comment('状态: 1 正常, 2=>禁止');
             $table->timestamps();
         });
     }

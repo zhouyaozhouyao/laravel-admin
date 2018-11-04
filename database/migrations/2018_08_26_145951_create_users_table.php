@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->comment('昵称');
             $table->string('email')->unique()->comment('邮箱');
-            $table->string('phone')->unique()->comment('手机号');
+            $table->string('phone')->unique()->nullable()->comment('手机号');
             $table->tinyInteger('gender')->default(0)->index()->comment('性别: 0未知,1男,2女');
             $table->integer('github_id')->index()->nullable()->comment('githubId');
             $table->string('github_name')->index()->nullable()->comment('github名称');
@@ -35,7 +35,6 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('is_banned')->default(0)->index()->comment('是否禁止用户');
             $table->tinyInteger('email_notify_enabled')->default(0)->index()->comment('邮箱是否激活');
             $table->timestamp('last_actived_at')->nullable()->comment('最后活跃时间');
-            $table->rememberToken();
             $table->timestamps();
         });
     }
