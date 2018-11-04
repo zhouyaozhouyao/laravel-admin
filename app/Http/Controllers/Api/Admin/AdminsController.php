@@ -16,14 +16,17 @@ use App\Http\Controllers\Api\Controller;
 class AdminsController extends Controller
 {
 
+
     /**
+     * 获取所有
      * @param Admin $admin
      * @return \Dingo\Api\Http\Response
      */
     public function index(Admin $admin)
     {
-        return $this->response->collection($admin->paginate(), AdminsTransformer::class);
+        return $this->response->paginator($admin->paginate(), AdminsTransformer::class);
     }
+
 
     /**
      * 新增管理员
@@ -38,6 +41,55 @@ class AdminsController extends Controller
         $admin->password = bcrypt($request->get('password'));
         $admin->save();
 
-        return $this->response->item($admin, AdminsTransformer::class)->setStatusCode('201');
+        return $this->response->item($admin, AdminsTransformer::class)->setStatusCode(201);
+    }
+
+
+    /**
+     * 查看
+     * @param Admin $admin
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show(Admin $admin)
+    {
+        return $this->response->item($admin, AdminsTransformer::class)->setStatusCode(200);
+    }
+
+
+    /**
+     * 更新
+     * @param Request $request
+     * @param Admin   $admin
+     * @return \Dingo\Api\Http\Response
+     */
+    public function update(Request $request, Admin $admin)
+    {
+        $this->validateRequest($request, 'store');
+        $admin->fill($request->all());
+        $admin->password = bcrypt($request->get('password'));
+        $admin->save();
+
+        return $this->response->noContent();
+    }
+
+
+    /**
+     * 删除
+     * @param Admin $admin
+     * @throws \Exception
+     */
+    public function destroy(Admin $admin)
+    {
+        $admin->delete();
+    }
+
+
+    /**
+     * 获取个人信息.
+     * @return \Dingo\Api\Http\Response
+     */
+    public function info()
+    {
+        return $this->response->item($this->user(), new AdminsTransformer());
     }
 }

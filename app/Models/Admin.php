@@ -69,6 +69,14 @@ class Admin extends Authenticatable
         'password'
     ];
 
+    public function findForPassport($username)
+    {
+        filter_var($username, FILTER_VALIDATE_EMAIL) ?
+            $credentials['email'] = $username :
+            $credentials['phone'] = $username;
+        return self::where($credentials)->first();
+    }
+
     /**
      * 用户关联角色反向一对一关系.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

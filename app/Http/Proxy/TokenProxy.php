@@ -16,20 +16,22 @@ class TokenProxy
 
     /**
      *  获取令牌.
+     * @param string $provider
      * @param array  $params
      * @param string $grant_type
      * @return mixed
      */
-    public function issueToken(array $params, string $grant_type)
+    public function issueToken($provider, array $params, string $grant_type)
     {
         //oauth/token
         $data = [
-            'client_id'     => env('PASSPORT_CLIENT_ID'),
-            'client_secret' => env('PASSPORT_CLIENT_SECRET'),
+            'client_id'     => $provider == 'admins' ? env('ADMIN_PASSPORT_CLIENT_ID') : env('PASSPORT_CLIENT_ID'),
+            'client_secret' => $provider == 'admins' ? env('ADMIN_PASSPORT_CLIENT_SECRET') : env('PASSPORT_CLIENT_SECRET'),
             'grant_type'    => $grant_type,
+            "provider"      => $provider,
         ];
-
         $data = array_merge($data, $params);
+
         $response = app(Client::class)->post(url('oauth/token'), [
             'form_params' => $data,
             'http_errors' => false,

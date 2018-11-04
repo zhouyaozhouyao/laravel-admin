@@ -22,7 +22,7 @@ class AdminsTransformer extends TransformerAbstract {
             'login_count'     => $admin->login_count,
             'create_ip'       => $admin->create_ip,
             'last_login_ip'   => $admin->last_login_ip,
-            'last_actived_at' => $admin->last_actived_at->toDateTimeString(),
+            'last_actived_at' => $admin->last_actived_at,
             'status'          => $admin->status,
             'role_id'         => $admin->role_id,
         ];
