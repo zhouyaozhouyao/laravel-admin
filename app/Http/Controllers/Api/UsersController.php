@@ -22,15 +22,7 @@ class UsersController extends Controller
     }
 
 
-    /**
-     * 获取某个用户的所有权限列表.
-     * @return \Dingo\Api\Http\Response
-     */
-    public function permissions()
-    {
-        $permissions = Auth::user()->getAllPermissions();
-        return $this->response->collection($permissions, PermissionTransformer::class);
-    }
+
 
     public function update(Request $request)
     {

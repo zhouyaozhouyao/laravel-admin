@@ -51,8 +51,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \SMartins\PassportMultiauth\Http\Middleware\MultiAuthenticate::class,
-//        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+//        'auth' => \SMartins\PassportMultiauth\Http\Middleware\MultiAuthenticate::class,
+        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

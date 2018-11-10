@@ -14,6 +14,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class TokenProxy
 {
 
+    const ADMIN_PROVIDER = "admin";
+    const USER_PROVIDER  = "users";
+
     /**
      *  获取令牌.
      * @param string $provider
@@ -25,13 +28,12 @@ class TokenProxy
     {
         //oauth/token
         $data = [
-            'client_id'     => $provider == 'admins' ? env('ADMIN_PASSPORT_CLIENT_ID') : env('PASSPORT_CLIENT_ID'),
-            'client_secret' => $provider == 'admins' ? env('ADMIN_PASSPORT_CLIENT_SECRET') : env('PASSPORT_CLIENT_SECRET'),
+            'client_id'     => $provider == 'admin' ? env('ADMIN_PASSPORT_CLIENT_ID') : env('PASSPORT_CLIENT_ID'),
+            'client_secret' => $provider == 'admin' ? env('ADMIN_PASSPORT_CLIENT_SECRET') : env('PASSPORT_CLIENT_SECRET'),
             'grant_type'    => $grant_type,
             "provider"      => $provider,
         ];
         $data = array_merge($data, $params);
-
         $response = app(Client::class)->post(url('oauth/token'), [
             'form_params' => $data,
             'http_errors' => false,

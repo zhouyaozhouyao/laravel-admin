@@ -12,6 +12,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Transformers\AdminsTransformer;
 use App\Http\Controllers\Api\Controller;
+use App\Transformers\PermissionTransformer;
 
 class AdminsController extends Controller
 {
@@ -91,5 +92,15 @@ class AdminsController extends Controller
     public function info()
     {
         return $this->response->item($this->user(), new AdminsTransformer());
+    }
+
+    /**
+     * 获取某个用户的所有权限列表.
+     * @return \Dingo\Api\Http\Response
+     */
+    public function permissions()
+    {
+        $permissions = $this->user()->getAllPermissions();
+        return $this->response->collection($permissions, PermissionTransformer::class);
     }
 }

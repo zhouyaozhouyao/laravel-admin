@@ -25,7 +25,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validateRequest($request);
-        $token = app(TokenProxy::class)->issueToken($request->all(), 'password');
+        $token = app(TokenProxy::class)->issueToken('users',$request->all(), 'password');
         return $this->response->array($token, DefaultTransformer::class);
     }
 
@@ -39,7 +39,7 @@ class LoginController extends Controller
     public function refresh(Request $request)
     {
         $this->validateRequest($request);
-        $token = app(TokenProxy::class)->issueToken($request->all(), 'refresh_token');
+        $token = app(TokenProxy::class)->issueToken('users',$request->all(), 'refresh_token');
         return $this->response->array($token, DefaultTransformer::class);
     }
 

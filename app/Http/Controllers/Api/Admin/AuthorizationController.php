@@ -25,7 +25,7 @@ class AuthorizationController extends Controller
     public function login(Request $request)
     {
         $this->validateRequest($request);
-        $token = app(TokenProxy::class)->issueToken('admins', $request->all(), 'password');
+        $token = app(TokenProxy::class)->issueToken(TokenProxy::ADMIN_PROVIDER, $request->all(), 'password');
         return $this->response->array($token, DefaultTransformer::class);
     }
 
@@ -39,7 +39,7 @@ class AuthorizationController extends Controller
     public function refresh(Request $request)
     {
         $this->validateRequest($request);
-        $token = app(TokenProxy::class)->issueToken('admins', $request->all(), 'refresh_token');
+        $token = app(TokenProxy::class)->issueToken(TokenProxy::ADMIN_PROVIDER, $request->all(), 'refresh_token');
         return $this->response->array($token, DefaultTransformer::class);
     }
 
@@ -47,6 +47,7 @@ class AuthorizationController extends Controller
     //logout.
     public function logout()
     {
+        dd($this->user());
         if(!\Auth::check()) {
             throw new UnauthorizedHttpException(get_class($this),
                 'Unable to authenticate with invalid API key and token.');

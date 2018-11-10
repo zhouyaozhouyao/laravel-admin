@@ -8,7 +8,7 @@
 
 $api->version('v1', [
     'namespace'  => 'App\Http\Controllers\Api\Admin',
-    'middleware' => ['cors', 'auth:admin', 'api.throttle', 'serializer:array'],
+    'middleware' => ['cors','api', 'auth:admin', 'api.throttle', 'serializer:array'],
     'limit'      => config('api.rate_limits.sign.limit'),
     'expires'    => config('api.rate_limits.sign.expires'),
 ], function($api) {
@@ -36,4 +36,8 @@ $api->version('v1', [
     //个人信息
     $api->get('admin/info', 'AdminsController@info')
         ->name('admin.info');
+
+    // 当前登录用户权限
+    $api->get('admin/permissions', 'AdminsController@permissions')
+        ->name('admin.permissions');
 });
