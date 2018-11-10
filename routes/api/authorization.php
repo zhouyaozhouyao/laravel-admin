@@ -15,4 +15,12 @@ $api->version('v1', [
     //登录
     $api->post('admin/login', 'AuthorizationController@login')
         ->name('admin.login');
+
+    // 根据refresh_token 换取access_token
+    $api->post('admin/token/refresh', 'AuthorizationController@refresh')
+        ->name('admin.refresh');
+
+    //删除 token.
+    $api->delete('admin/logout', 'AuthorizationController@logout')
+        ->name('admin.logout');
 });
