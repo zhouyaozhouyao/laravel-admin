@@ -25,7 +25,7 @@ class AdminsController extends Controller
      */
     public function index(Admin $admin)
     {
-        return $this->response->paginator($admin->paginate(), AdminsTransformer::class);
+        return $this->response->paginator($admin->paginate(request("per_page")), AdminsTransformer::class);
     }
 
 
@@ -65,9 +65,11 @@ class AdminsController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
-        $this->validateRequest($request, 'store');
+        $this->validateRequest($request, 'update');
         $admin->fill($request->all());
-        $admin->password = bcrypt($request->get('password'));
+        if($request->get('password')) {
+            $admin->password = bcrypt($request->get('password'));
+        }
         $admin->save();
 
         return $this->response->noContent();

@@ -16,13 +16,15 @@ class PermissionTransformer extends TransformerAbstract
     public function transform(Permission $permission)
     {
         return [
-            'id'        => $permission->id,
-            'name'      => $permission->name,
-            'route'     => $permission->route,
-            'parent_id' => $permission->parent_id,
-            'is_hidden' => $permission->is_hidden,
-            'sort'      => $permission->sort,
-            'status'    => $permission->status,
+            'id'         => $permission->id,
+            'name'       => $permission->name,
+            'route'      => $permission->route,
+            'parent_id'  => $permission->parent_id,
+            'is_hidden'  => $permission->is_hidden,
+            'sort'       => $permission->sort,
+            'status'     => $permission->status,
+            'created_at' => $permission->created_at->toDateTimeString(),
+            'updated_at' => $permission->updated_at->toDateTimeString(),
         ];
     }
 }

@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Permission extends Model
 {
-    protected $fillable = ['name', 'route', 'parent_id','sort', 'status'];
+    protected $fillable = ['name', 'route','icon', 'parent_id','is_hidden','sort', 'status'];
 
 
     /**

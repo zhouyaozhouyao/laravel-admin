@@ -16,7 +16,7 @@ class PermissionController extends Controller
      */
     public function index(Permission $permission)
     {
-        $permissions = $permission->paginate();
+        $permissions = $permission::paginate(request('per_page'));
 
         return $this->response->paginator($permissions, PermissionTransformer::class);
     }

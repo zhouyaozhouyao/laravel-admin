@@ -93,6 +93,10 @@ class Admin extends Authenticatable
     public function getAllPermissions()
     {
         $role = $this->role;
+        if($role->id == 1){
+            return app(Permission::class)->get();
+        }
+
         if(is_null($role)) {
             return new Collection();
         }

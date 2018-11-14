@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Models\Role;
 use App\Models\Permission;
-use App\Services\PermissionService;
 use Illuminate\Http\Request;
 use App\Transformers\RoleTransformer;
+use App\Http\Controllers\Api\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RoleController extends Controller

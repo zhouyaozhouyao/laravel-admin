@@ -7,7 +7,7 @@
  */
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api', 'middleware' => ['cors','bindings'],
+    'namespace' => 'App\Http\Controllers\Api', 'middleware' => ['cors','bindings','serializer:array'],
 ], function ($api) {
 
     //权限列表 (分页)

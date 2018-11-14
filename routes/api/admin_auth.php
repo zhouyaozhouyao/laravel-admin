@@ -9,8 +9,8 @@
 $api->version('v1', [
     'namespace'  => 'App\Http\Controllers\Api\Admin',
     'middleware' =>['cors','api.throttle', 'serializer:array'],
-    'limit'      => config('api.rate_limits.sign.limit'),
-    'expires'    => config('api.rate_limits.sign.expires'),
+//    'limit'      => config('api.rate_limits.sign.limit'),
+//    'expires'    => config('api.rate_limits.sign.expires'),
 ], function($api) {
     //登录
     $api->post('admin/login', 'AuthorizationController@login')
@@ -21,6 +21,6 @@ $api->version('v1', [
         ->name('admin.refresh');
 
     //删除 token.
-    $api->delete('admin/oauth/tokens', 'AuthorizationController@logout')
-        ->name('admin.logout')->middleware('api', 'auth:admin');
+    $api->delete('admin/logout', 'AuthorizationController@logout')
+        ->name('admin.logout');
 });

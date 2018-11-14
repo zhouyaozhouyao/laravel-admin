@@ -8,9 +8,9 @@
 
 $api->version('v1', [
     'namespace'  => 'App\Http\Controllers\Api\Admin',
-    'middleware' => ['cors','api', 'auth:admin', 'api.throttle', 'serializer:array'],
-    'limit'      => config('api.rate_limits.sign.limit'),
-    'expires'    => config('api.rate_limits.sign.expires'),
+    'middleware' => ['cors','api', 'auth:admin',  'serializer:array'],
+//    'limit'      => config('api.rate_limits.sign.limit'),
+//    'expires'    => config('api.rate_limits.sign.expires'),
 ], function($api) {
 
     //获取所有管理员

@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Proxy\TokenProxy;
 use App\Transformers\DefaultTransformer;
@@ -47,8 +48,8 @@ class AuthorizationController extends Controller
     //logout.
     public function logout()
     {
-        dd($this->user());
-        if(!\Auth::check()) {
+        dd(Auth::user());
+        if(!Auth::check()) {
             throw new UnauthorizedHttpException(get_class($this),
                 'Unable to authenticate with invalid API key and token.');
         }
