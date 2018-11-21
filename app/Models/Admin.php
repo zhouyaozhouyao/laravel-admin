@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\Models\Admin
+ *
  * @property int                                                                                                            $id
  * @property string                                                                                                         $name            用户名
  * @property string                                                                                                         $password        密码

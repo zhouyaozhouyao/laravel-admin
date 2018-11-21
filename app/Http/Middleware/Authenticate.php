@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Exceptions\AuthorizeException;
 use Auth;
 use Closure;
+use App\Exceptions\AuthorizeException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class Authenticate

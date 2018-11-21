@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\Role
+ *
  * @property int                                                                    $id
  * @property string                                                                 $name   角色名称
  * @property string|null                                                            $remark 角色描述
