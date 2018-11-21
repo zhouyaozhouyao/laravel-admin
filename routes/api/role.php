@@ -7,7 +7,7 @@
  */
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api\Admin', 'middleware' => ['cors','bindings','serializer:array'],
+    'namespace' => 'App\Http\Controllers\Api\Admin', 'middleware' => ['cors','bindings','auth:admin','rbac','serializer:array'],
 ], function ($api) {
 
     //角色列表 (分页)

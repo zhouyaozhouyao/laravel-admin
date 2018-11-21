@@ -48,7 +48,6 @@ class AuthorizationController extends Controller
     //logout.
     public function logout()
     {
-        dd(Auth::user());
         if(!Auth::check()) {
             throw new UnauthorizedHttpException(get_class($this),
                 'Unable to authenticate with invalid API key and token.');

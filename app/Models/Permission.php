@@ -32,8 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Permission extends Model
 {
-    protected $fillable = ['name', 'route','icon', 'parent_id','is_hidden','sort', 'status'];
-
+    protected $fillable = ['name', 'route','icon', 'parent_id','is_hidden','sort'];
 
     /**
      * 定义权限和角色多对多关系.

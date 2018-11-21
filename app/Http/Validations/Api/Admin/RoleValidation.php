@@ -6,7 +6,7 @@
  * Time: 13:13
  */
 
-namespace App\Http\Validations\Api;
+namespace App\Http\Validations\Api\Admin;
 
 use Illuminate\Validation\Rule;
 

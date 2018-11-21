@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\MultiAuthenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -67,5 +68,9 @@ class Kernel extends HttpKernel
 
         //认证
         'oauth.providers' => \SMartins\PassportMultiauth\Http\Middleware\AddCustomProvider::class,
+
+
+        //rbac
+        'rbac' => Authenticate::class,
     ];
 }

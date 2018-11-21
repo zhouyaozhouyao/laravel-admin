@@ -9,30 +9,30 @@
 namespace App\Models;
 
 use Laravel\Passport\HasApiTokens;
+use App\Models\Traits\HasPermission;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\Models\Admin
- *
- * @property int $id
- * @property string $name 用户名
- * @property string $password 密码
- * @property string|null $email email
- * @property string|null $avatr 头像
- * @property int $login_count 登录次数
- * @property string|null $create_ip 注册ip
- * @property string|null $last_login_ip 最后登录IP
- * @property string|null $last_actived_at 最后活跃时间
- * @property int $status 状态: 1 正常, 2=>禁止
- * @property int|null $role_id 关联角色
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property int                                                                                                            $id
+ * @property string                                                                                                         $name            用户名
+ * @property string                                                                                                         $password        密码
+ * @property string|null                                                                                                    $email           email
+ * @property string|null                                                                                                    $avatr           头像
+ * @property int                                                                                                            $login_count     登录次数
+ * @property string|null                                                                                                    $create_ip       注册ip
+ * @property string|null                                                                                                    $last_login_ip   最后登录IP
+ * @property string|null                                                                                                    $last_actived_at 最后活跃时间
+ * @property int                                                                                                            $status          状态: 1 正常, 2=>禁止
+ * @property int|null                                                                                                       $role_id         关联角色
+ * @property \Carbon\Carbon|null                                                                                            $created_at
+ * @property \Carbon\Carbon|null                                                                                            $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[]                                       $clients
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read \App\Models\Role|null $role
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @property-read \App\Models\Role|null                                                                                     $role
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Admin whereAvatr($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Admin whereCreateIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Admin whereCreatedAt($value)
@@ -50,7 +50,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class Admin extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, HasPermission, Notifiable;
 
     protected $fillable = [
         'name',
@@ -87,13 +87,23 @@ class Admin extends Authenticatable
     }
 
     /**
+     * 获取用户角色
+     * @return mixed
+     */
+    public static function getRole()
+    {
+        return \Auth::guard('admin')->user()->role;
+    }
+
+
+    /**
      * 获取用户的权限列表.
      * @return null
      */
     public function getAllPermissions()
     {
         $role = $this->role;
-        if($role->id == 1){
+        if(in_array($role->id, config('permission.WHITE_ROLES'))) {
             return app(Permission::class)->get();
         }
 

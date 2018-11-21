@@ -48,7 +48,7 @@ class RoleController extends Controller
     {
         $this->validateRequest($request);
         $permission_ids = $request->get("permission_ids");
-        $this->permissionExist($permission_ids);
+        if(!is_null($permission_ids))$this->permissionExist($permission_ids);
 
         $role->fill($request->all());
         $role->save();
@@ -79,10 +79,10 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $this->validateRequest($request);
+        $this->validateRequest($request,'update');
+        dd(11);
         $permission_ids = $request->get("permission_ids");
-        $this->permissionExist($permission_ids);
-
+        if(!is_null($permission_ids))$this->permissionExist($permission_ids);
         $role->fill($request->all());
         $role->save();
         $role->permissions()->sync($permission_ids);

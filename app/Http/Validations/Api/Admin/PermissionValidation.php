@@ -6,7 +6,7 @@
  * Time: 00:02
  */
 
-namespace App\Http\Validations\Api;
+namespace App\Http\Validations\Api\Admin;
 
 use Illuminate\Validation\Rule;
 
@@ -44,7 +44,7 @@ class PermissionValidation
                 'name'      => [
                     'nullable',
                     'between:1,20',
-                    Rule::unique('permission')->ignore(request()->route('permission.id'))
+                    Rule::unique('permissions')->ignore(request()->route('permission.id'))
                 ],
                 'route'     => 'nullable|max:256',
                 'parent_id' => 'nullable|integer',

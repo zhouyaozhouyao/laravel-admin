@@ -8,7 +8,7 @@
 
 $api->version('v1', [
     'namespace'  => 'App\Http\Controllers\Api\Admin',
-    'middleware' => ['cors','api', 'auth:admin',  'serializer:array'],
+    'middleware' => ['cors','api', 'auth:admin','rbac',  'serializer:array'],
 //    'limit'      => config('api.rate_limits.sign.limit'),
 //    'expires'    => config('api.rate_limits.sign.expires'),
 ], function($api) {

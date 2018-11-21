@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Controller;
 use App\Transformers\PermissionTransformer;
 
 class PermissionController extends Controller

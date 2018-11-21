@@ -21,7 +21,6 @@ class RoleTransformer extends TransformerAbstract
             'id'         => $role->id,
             'name'       => $role->name,
             'remark'     => $role->remark,
-            'status'     => $role->status,
             'created_at' => $role->created_at->toDateTimeString(),
             'updated_at' => $role->updated_at->toDateTimeString(),
         ];

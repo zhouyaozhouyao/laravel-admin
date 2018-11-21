@@ -7,7 +7,7 @@
  */
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api', 'middleware' => ['cors','bindings','serializer:array'],
+    'namespace' => 'App\Http\Controllers\Api\Admin', 'middleware' => ['cors','rbac','auth:admin','bindings','serializer:array'],
 ], function ($api) {
 
     //权限列表 (分页)
@@ -16,13 +16,13 @@ $api->version('v1', [
 
     //权限列表
     $api->get('permissions/list','PermissionController@list')
-        ->name('permissions/list');
+        ->name('permissions.list');
 
     //新建权限.
     $api->post('permissions','PermissionController@store')
         ->name('permissions.store');
 
     //更新权限
-    $api->put('permissions/{role}','PermissionController@update')
+    $api->put('permissions/{permission}','PermissionController@update')
         ->name('permissions.update');
 });

@@ -20,9 +20,9 @@ class PermissionTransformer extends TransformerAbstract
             'name'       => $permission->name,
             'route'      => $permission->route,
             'parent_id'  => $permission->parent_id,
+            'parent_name'  => optional(app(Permission::class)->where('id',$permission->parent_id)->first())->name,
             'is_hidden'  => $permission->is_hidden,
             'sort'       => $permission->sort,
-            'status'     => $permission->status,
             'created_at' => $permission->created_at->toDateTimeString(),
             'updated_at' => $permission->updated_at->toDateTimeString(),
         ];
